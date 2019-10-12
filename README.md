@@ -4,7 +4,7 @@
 
 ```
 git clone https://github.com/Dmitri801/chosentones.git
-cd client
+cd app
 npm install
 npm start
 ```

@@ -17,6 +17,10 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  source: {
+    type: String,
+    default: "direct"
+  },
   admin: {
     type: String,
     default: false
@@ -25,7 +29,7 @@ const UserSchema = new mongoose.Schema({
 
 // Bcrypt password encryption
 
-UserSchema.pre("save", function(next) {
+UserSchema.pre("save", function (next) {
   const user = this;
 
   bcrypt.genSalt(10, (err, salt) => {
@@ -42,7 +46,7 @@ UserSchema.pre("save", function(next) {
   });
 });
 
-UserSchema.methods.validPassword = function(password, callback) {
+UserSchema.methods.validPassword = function (password, callback) {
   bcrypt.compare(password, this.password, (err, isMatch) => {
     if (err) {
       return callback(err);

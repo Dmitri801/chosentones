@@ -5,10 +5,10 @@ require("dotenv").config();
 
 function createToken(user) {
   const timeStamp = new Date().getTime();
-  return jwt.encode({ sub: user._id, iat: timeStamp }, process.env.SECRET);
+  return jwt.encode({ sub: user._id, iat: timeStamp }, process.env.JWT_SECRET);
 }
 
-exports.register = function(req, res, next) {
+exports.register = function (req, res, next) {
   // See if a user with given email exists
   const { email, firstName, lastName, password, admin } = req.body;
   if (!email || !password) {
@@ -48,6 +48,6 @@ exports.register = function(req, res, next) {
     });
 };
 
-exports.signIn = function(req, res, next) {
+exports.signIn = function (req, res, next) {
   res.json({ token: createToken(req.user) });
 };

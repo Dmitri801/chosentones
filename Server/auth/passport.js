@@ -8,7 +8,7 @@ require("dotenv").config();
 // Local Strategy
 const localLogin = new LocalStrategy(
   { usernameField: "email", passwordField: "password" },
-  function(email, password, done) {
+  function (email, password, done) {
     User.findOne({ email: email }, (err, user) => {
       if (err) {
         return done(err);
@@ -35,11 +35,11 @@ const localLogin = new LocalStrategy(
 
 // Set up options for JWT strategy
 const jwtOptions = {
-  secretOrKey: process.env.SECRET,
+  secretOrKey: process.env.JWT_SECRET,
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken()
 };
 // Create JWT strategy
-const jwtLogin = new JwtStrategy(jwtOptions, function(jwt_payload, done) {
+const jwtLogin = new JwtStrategy(jwtOptions, function (jwt_payload, done) {
   User.findOne({ _id: jwt_payload.sub }, (err, user) => {
     if (err) {
       return done(err, false);

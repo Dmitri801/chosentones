@@ -19,7 +19,7 @@ function SamplerTest() {
         <div>
             <h1> here we'll test the sampler</h1>
             <button disabled={!isLoaded} onClick={handleClick}>
-                start
+                DOPE 808
       </button>
         </div>
     )
